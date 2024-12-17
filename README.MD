@@ -2,10 +2,10 @@
 
 ## Table des Matières
 1. [Classes en Python](#1-classes-en-python)
-2. [Interaction avec l'Utilisateur](#2-interaction-avec-lutilisateur)
-3. [Interface en Ligne de Commande (CLI) avec `argparse`](#3-interface-en-ligne-de-commande-cli-avec-argparse)
-4. [Listes en Python](#4-listes-en-python)
-5. [Gestion des Arguments](#5-gestion-des-arguments)
+2. [Classes Instanciables](#2-classes-instanciables)
+3. [Interaction avec l'Utilisateur](#3-interaction-avec-lutilisateur)
+4. [Interface en Ligne de Commande (CLI) avec `argparse`](#4-interface-en-ligne-de-commande-cli-avec-argparse)
+5. [Listes en Python](#5-listes-en-python)
 
 ---
 
@@ -94,7 +94,62 @@ print(cat.speak())  # Output: Meow!
 
 ---
 
-## 2. Interaction avec l'Utilisateur
+## 2. Classes Instanciables
+
+Une **classe instanciable** est une classe que l'on peut utiliser pour créer des objets concrets. Ces objets sont appelés des instances de la classe. Pour qu'une classe soit instanciable, elle doit :
+
+1. Être définie avec le mot-clé `class`.
+2. Contenir un constructeur (`__init__`) pour initialiser les attributs de l'objet.
+3. Avoir des méthodes pour manipuler ses données ou effectuer des actions.
+
+### Exemple : Classe Instanciable
+```python
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+# Création d'instances de la classe Rectangle
+rect1 = Rectangle(5, 10)
+rect2 = Rectangle(3, 4)
+
+print(f"Aire du rect1 : {rect1.area()}")       # Output: 50
+print(f"Périmètre du rect2 : {rect2.perimeter()}")  # Output: 14
+```
+
+### Exemple Avancé : Gestion de Livres
+```python
+class Book:
+    def __init__(self, title, author, pages):
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    def description(self):
+        return f"'{self.title}' by {self.author}, {self.pages} pages."
+
+# Liste de livres
+library = [
+    Book("1984", "George Orwell", 328),
+    Book("Brave New World", "Aldous Huxley", 268),
+    Book("Fahrenheit 451", "Ray Bradbury", 256)
+]
+
+for book in library:
+    print(book.description())
+```
+
+**Résumé :** Les classes instanciables permettent de modéliser des entités du monde réel, comme des rectangles ou des livres, en encapsulant leurs données et comportements dans des objets.
+
+---
+
+## 3. Interaction avec l'Utilisateur
 
 Créer des interactions utilisateur simples peut être fait en utilisant `input()` pour capturer des données saisies.
 
@@ -134,7 +189,7 @@ menu()
 
 ---
 
-## 3. Interface en Ligne de Commande (CLI) avec `argparse`
+## 4. Interface en Ligne de Commande (CLI) avec `argparse`
 
 Le module `argparse` est utile pour créer des programmes en ligne de commande où les arguments sont passés lors de l'exécution.
 
@@ -176,7 +231,7 @@ python script.py add 5 10
 
 ---
 
-## 4. Listes en Python
+## 5. Listes en Python
 
 Les listes permettent de regrouper plusieurs éléments dans une seule variable et offrent de nombreuses méthodes pour manipuler les données.
 
@@ -184,53 +239,12 @@ Les listes permettent de regrouper plusieurs éléments dans une seule variable 
 ```python
 names = ["Alice", "Bob", "Charlie"]
 
-# Parcours de la liste
+# Parcours des éléments avec une boucle
 for name in names:
     if len(name) > 3:
         print(f"{name} a plus de 3 lettres.")
-
-# Ajout et suppression
-names.append("Diana")
-names.remove("Bob")
-print(f"Liste mise à jour : {names}")
+    else:
+        print(f"{name} a 3 lettres ou moins.")
 ```
 
----
 
-## 5. Gestion des Arguments
-
-Vous pouvez combiner `argparse` avec des interactions pour créer des outils flexibles.
-
-### Exemple : Calculatrice avec Modes CLI et Interactif
-```python
-import argparse
-
-class Calculator:
-    def add(self, a, b):
-        return a + b
-
-    def subtract(self, a, b):
-        return a - b
-
-def parse_arguments():
-    parser = argparse.ArgumentParser(description="Mode CLI")
-    parser.add_argument("operation", choices=['add', 'subtract'], help="Opération")
-    parser.add_argument("num1", type=float, help="Premier nombre")
-    parser.add_argument("num2", type=float, help="Deuxième nombre")
-    return parser.parse_args()
-
-def main():
-    args = parse_arguments()
-    calc = Calculator()
-    if args.operation == 'add':
-        print(calc.add(args.num1, args.num2))
-    elif args.operation == 'subtract':
-        print(calc.subtract(args.num1, args.num2))
-
-if __name__ == "__main__":
-    main()
-```
-
-Pour plus d'aide:
-
- - https://github.com/stanthblt/python
