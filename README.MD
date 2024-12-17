@@ -249,3 +249,4 @@ for name in names:
 
 
 https://github.com/stanthblt/python
+https://gitlab.com/noemie9015641/doc_python#classes-et-objets
