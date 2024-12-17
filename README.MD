@@ -230,3 +230,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+Pour plus d'aide:
+
+ - https://github.com/stanthblt/python
